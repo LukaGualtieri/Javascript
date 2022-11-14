@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolletta Versione Verifica</title>
+</head>
+<body>
+	<h1>Bolletta Verifica</h1>
+
+    <table border="1px" id="tab1">
+        <thead>
+            <tr>
+                <th>Codice Cliente:</th>
+                <th><input type="text" name="" id="codice"></th>
+            </tr>
+            <tr>
+                <th>Kw/h consumati:</th>
+                <th><input type="text" name="" id="consumo"></th>
+            </tr>
+            <tr>
+                <th>IVA</th>
+                <th><input type="text" name="" id="iva" disabled value="0.22"></th>
+            </tr>
+            <tr>
+                <th>Costo KW</th>
+                <th><input type="text" name="" id="costokw" disabled value="0.03"></th>
+            </tr>
+            <tr>
+                <th>Canone</th>
+                <th><input type="text" name="" id="canone" disabled value="20"></th>
+            </tr>
+            <tr>
+                <th><button id="add" onclick="aggiungi()">Inserisci</button></th>
+                <th><button id="add" onclick="calcola()">Mostra</button></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table> 
+
+    <br>
+    <hr>
+    <br>
+
+    <table border="1px" id="tab2">
+        <thead>
+             <tr>
+            <th>Codice</th>
+            <th>Consumo*Costo KWH</th>
+            <th>Canone</th>
+            <th>Iva</th>
+            <th>Totale</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+       
+
+    <script>
+        function aggiungi(){
+            var codCliente=document.getElementById("codice").value;
+            var consumo=parseInt(document.getElementById("consumo").value);
+            let iva=parseFloat(document.getElementById("iva").value);
+            let costokw=parseFloat(document.getElementById("costokw").value);
+            let canone=parseFloat(document.getElementById("canone").value);        
+            do{ 
+                if(codCliente<0 || consumo<0)
+                    alert("Inserire un numero maggiore di 0")
+                else if(isNaN(codCliente) || isNaN(consumo))
+                    alert("Inserire un numero")    
+            }while(isNaN(codCliente || consumo) || codCliente<0 || consumo<0)         
+        }
+        
+        function calcola(){
+            let codice=document.getElementById("codice").value;
+            let consumo=parseInt(document.getElementById("consumo").value);
+            let iva=parseFloat(document.getElementById("iva").value);
+            let costokw=parseFloat(document.getElementById("costokw").value);
+            let canone=parseFloat(document.getElementById("canone").value);
+            let totCons=consumo*costokw;
+            let totIva=totCons*iva;
+            let totale=totCons+canone+totIva;
+            let t=document.getElementById("tab2");
+            let tbody=t.children[1];
+            var cont=0;
+            
+            const tr=document.createElement("tr");
+            let td=document.createElement("td");
+            td.innerText=`${codice}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+            td.innerText=`${consumo}*${costokw}=${totCons.toFixed(2)}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+            td.innerText=`${canone}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+            td.innerText=`${totCons}*${iva*100}%=${totIva.toFixed(2)}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+            td.innerText=`${totale.toFixed(2)}€`;
+            cont+=totale;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
+
+
+    </script>
+</body>
+</html>
