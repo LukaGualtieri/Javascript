@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatti in Fila Verifica</title>
+</head>
+<style>
+    img {
+      max-width: 200px;
+    }
+    table {
+      font-size:2em;
+      text-align: center;
+    }
+  </style>
+<body onload="inserimento()">
+
+    <h1>Gatti in Fila Verifica</h1>
+
+        <button onclick="genera()">Genera Tabella</button>
+        
+        <table>
+            <tbody id=tbody></tbody>
+        </table>
+
+        <script>
+        
+        let nGatti;
+        let nGattiInFila;
+
+        function inserimento() {
+          nGatti=Number(prompt("Inserisci il numero di gatti: "));
+          nGattiInFila=Number(prompt("Inserisci il numero di gatti in ogni fila: "));
+        }
+        
+        function genera(){
+            let nFile=Math.ceil(nGatti/nGattiInFila);
+            for(let i=1; i<nFile; i++){
+                nFile=document.createElement("tr");
+                document.getElementById("tbody").appendChild(nFile);
+                let td=document.createElement("td");
+                let img=document.createElement("img");
+                img.src="https://i.postimg.cc/bNXTKDgJ/pexels-photo-617278.jpg";
+                td.appendChild(img);
+                nFile.appendChild(td); 
+            }          
+        }
+        </script>
+</body>
+</html>
