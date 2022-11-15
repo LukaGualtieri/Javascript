@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maggiore della somma dei precedenti</title>
+</head>
+<body>
+	<table border="1px">
+        <tbody id="tbody">
+            <tr>
+                <td>Cont</td>                           <!--Creo la tabella-->
+                <td>Num</td>
+                <td>Somma Prec.</td>
+                <td>Max Somma Prec.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+       //Creo delle variabili e gli assegno l'elemento(in questo caso a tr assegno "tr") 
+        let tr=document.createElement("tr");            
+        let td=document.createElement("td");
+        let tbody=document.getElementById("tbody");
+        let num=1, cont=1, somma=0;
+
+        do{
+            // Chiedo i numeri da inserire tramite prompt e, con il ciclo do-while, quando inserisco 0 finisce di chiedere i numeri
+            num=Number(prompt("Inserisci i numeri: "));
+
+            td.innerText=cont; //Mostro cont nella colonna CONT
+            tr.appendChild(td); //Assegno a tr, tramite appendChild, td.
+            td=document.createElement("td"); //Creo l'elemento td
+            
+            td.innerText=num;  //stesse cose di prima
+            tr.appendChild(td);
+            td=document.createElement("td");
+
+            td.innerText=somma; //stesse cose di prima
+            tr.appendChild(td);
+            td=document.createElement("td");
+            
+            if(num>somma){
+                td.innerText="Si"; //stesse cose di prima
+                tr.appendChild(td);
+                td=document.createElement("td");
+            }
+            else{
+                td.innerText="No"; //stesse cose di prima
+                tr.appendChild(td);
+                td=document.createElement("td");
+            }
+
+            tbody.appendChild(tr); //Assegno a tbody, tramite l'appendChild, tr.
+            tr=document.createElement("tr");
+
+            cont++;
+            somma+=num;
+
+        }while(num!=0);
+    </script>
+</body>
+</html>
