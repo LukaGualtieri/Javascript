@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Metafora Topolino Luka Gualtieri</title>
+    <br>
+
+  </head>
+
+  <body>
+    <h3>Simulazione</h3>
+    <hr>
+    <br>
+  
+    <form>
+        <div class="form-group">
+          <label for="inputSoggetto">Topolino</label>
+          <input type="text" class="form-control" id="inputSoggetto" aria-describedby="soggettoHelp" placeholder="SOGGETTO protagonista">
+        </div>
+        <div class="form-group">
+          <label for="inputObiettivo">Formaggio</label>
+          <input type="text" class="form-control" id="inputObiettivo" placeholder="OBIETTIVO da raggiungere">
+        </div>
+        <div class="form-group">
+          <label for="inputFame">Fame</label>
+          <input type="text" class="form-control" id="inputFame" placeholder="MOTIVAZIONE che spinge verso l'obiettivo">
+        </div>
+        <div class="form-group">
+          <label for="inputLabirinto">Labirinto</label>
+          <input type="text" class="form-control" id="inputLabirinto" placeholder="CONTESTO in cui si svolge l'azione">
+        </div>
+        <div class="form-group">
+          <label for="inputStrada">Strada</label>
+          <input type="text" class="form-control" id="inputStrada" placeholder="COMPORTAMENTO">
+        </div>
+        <div class="form-group">
+          <label for="inputStradaOk">Strada OK</label>
+          <input type="text" class="form-control" id="inputStradaOk" placeholder="COMPORTAMENTO ADEGUATO">
+        </div>
+        <div class="form-group">
+          <label for="inputStradaKo">Strada KO</label>
+          <input type="text" class="form-control" id="inputStradaKo" placeholder="COMPORTAMENTO INADEGUATO">
+        </div>
+        <div class="form-group">
+         <label for="inputTestata">Testata</label>
+         <input type="text" class="form-control" id="inputTestata" placeholder="CONSEGUENZE NEGATIVE del comportamento inadeguato">
+        </div>
+
+        <div class="form-group">
+            <label for="inputDistanza">Distanza</label>
+            <input type="text" class="form-control" id="inputDistanza" placeholder="0">
+           </div>
+
+        <center>
+        <div class="form-group">
+            <button type="button"class="btn btn-primary" onclick="inizio()">Inizio</button>
+        </div> 
+        <div class="form-group">
+            <button type="button" class="btn btn-light" id="btnSX" onclick="bottoneSx()"></button>
+            <button type="button" class="btn btn-light" id="btnDX" onclick="bottoneDx()"></button>
+        </div>
+        </center>
+        <label for="textarea" class="control-label">
+            <b>Narrazione</b>
+        </label>
+        <div class="form-group">
+            <textarea class="form-control" id="myTextArea"></textarea>    
+        </div>
+       
+    
+    </form>
+
+    <script>
+        var step1=1, contSi, contNo, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0;
+
+
+        if (Motivato==0){
+            if(document.getElementById("inputSoggetto").value!="")
+                var soggetto=document.getElementById("inputSoggetto").value;
+            else
+                soggetto="SOGGETTO"
+
+            if(document.getElementById("inputObiettivo").value!="")
+                var obiettivo=document.getElementById("inputObiettivo").value;
+            else
+                obiettivo="OBIETTIVO"
+
+            if(document.getElementById("inputFame").value!="")
+                var motivazione=document.getElementById("inputFame").value;
+            else
+                motivazione="MOTIVAZIONE"
+
+            if(document.getElementById("inputLabirinto").value!="")
+                var contesto=document.getElementById("inputLabirinto").value;
+            else
+                contesto="CONTESTO"
+
+            if(document.getElementById("inputStrada").value!="")
+                var comportamento=document.getElementById("inputStrada").value;
+            else
+                comportamento="COMPORTAMENTO"
+
+            if(document.getElementById("inputStradaOk").value!="")
+                var comportamentoAde=document.getElementById("inputStradaOk").value;
+            else
+                comportamentoAde="COMPORTAMENTO ADEGUATO"
+            
+            if(document.getElementById("inputStradaKo").value!="")
+                var comportamentoInade=document.getElementById("inputStradaKo").value;
+            else
+                comportamentoInade="COMPORTAMENTO INADEGUATO"
+
+            if(document.getElementById("inputTestata").value!="")
+                var testata=document.getElementById("inputTestata").value;
+            else
+                testata="CONSEGUENZE NEGATIVE"
+            }
+
+        var cont=3;
+
+        function myFunction() {
+            document.getElementById("myTextArea").value+="\n"+cont;
+            cont++;
+            document.getElementById("myTextArea").scrollTop=document.getElementById("myTextArea").scrollHeight;        
+        }
+
+
+        function popup(pagina) {
+            window.open(pagina, '', 'width=560, height=390, left=500, top=100, resizable=yes, toolbar=no, scrollbar=no, status=no');
+        }
+
+        function inizio() {
+            contSi=0;
+            contNo=0;
+
+            
+
+            document.getElementById("myTextArea").value=
+            `Distanza iniziale dall'obiettivo: (${cont})\n${soggetto} vuoi raggiungere ${obiettivo}?`
+            document.getElementById("btnSX").innerText="No"
+            document.getElementById("btnDX").innerText="Si"
+        }
+
+       function bottoneSx(){
+        if(step1==1){
+        document.getElementById("myTextArea").value+=` NO!\n Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo!`
+        step1=2
+        document.getElementById("btnSX").innerText="Scorretto"
+        document.getElementById("btnDX").innerText="Corretto"
+    }
+        else{
+            document.getElementById("myTextArea").value+=` creatina`
+
+        }
+
+
+
+            /* if(Motivato==true){
+                print("troppo lontano")
+                if(troppoLontano==true){
+                apre testata popup
+            }
+            contNo++;
+            print(la scelta ko ti allontana... )
+            }
+            print("mancando motivazione non raggiungerai obiettivo")*/
+        }
+
+        function bottoneDx(){
+            if(step1==1){
+            document.getElementById("myTextArea").value+=` SI!\n ${soggetto} quale ${comportamento} scegli?`
+            step1=2
+            document.getElementById("btnSX").innerText="Scorretto"
+            document.getElementById("btnDX").innerText="Corretto"
+    }
+        else{
+            document.getElementById("myTextArea").value+=` proteine`
+
+        }
+
+
+            /*if(Motivato==true){
+                print("raggiunto obiettivo")
+                if(raggiunto obiettivo==true){
+                    complimenti ed apre il popup
+            }
+            contSI++;
+            print(la scelta ok ti avvicina... )
+            }
+            motivato=1;
+            aggiorna testo dei bottoni*/
+        }
+
+
+        function myFunction2() {
+            document.getElementById("narrazione").innerText= 
+            `${soggetto} vuoi raggiungere ${obiettivo}? NO!
+            Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo!
+            ${soggetto} vuoi raggiungere ${obiettivo}? SI!
+            ${soggetto} quale ${comportamento} scegli?
+            ATTENZIONE ${soggetto} la scelta ${comportamentoInade} ti allontana da ${obiettivo}
+            :-( ${soggetto} ti sei allontanato troppo hai scelto la strada chiusa ${comportamentoInade} e ti sei scontarto con ${testata}
+            ${soggetto} quale ${comportamento} scegli?
+            ${soggetto} la scelta ${comportamentoAde} ti avvicina a ${obiettivo} continua così!
+            Coraggio ci sei quasi fai l'ultimo passo!
+            :-) COMPLIMENTI ${soggetto} hai raggiunto ${obiettivo}!!!`
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
