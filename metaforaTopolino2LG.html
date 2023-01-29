@@ -19,32 +19,39 @@
     <form>
         <div class="form-group">
           <label for="inputSoggetto">Topolino</label>
-          <input type="text" class="form-control" id="inputSoggetto" aria-describedby="soggettoHelp" placeholder="SOGGETTO protagonista">
+          <input type="text" class="form-control" id="inputSoggetto" placeholder="SOGGETTO protagonista">
         </div>
+
         <div class="form-group">
           <label for="inputObiettivo">Formaggio</label>
           <input type="text" class="form-control" id="inputObiettivo" placeholder="OBIETTIVO da raggiungere">
         </div>
+
         <div class="form-group">
           <label for="inputFame">Fame</label>
           <input type="text" class="form-control" id="inputFame" placeholder="MOTIVAZIONE che spinge verso l'obiettivo">
         </div>
+
         <div class="form-group">
           <label for="inputLabirinto">Labirinto</label>
           <input type="text" class="form-control" id="inputLabirinto" placeholder="CONTESTO in cui si svolge l'azione">
         </div>
+
         <div class="form-group">
           <label for="inputStrada">Strada</label>
           <input type="text" class="form-control" id="inputStrada" placeholder="COMPORTAMENTO">
         </div>
+
         <div class="form-group">
           <label for="inputStradaOk">Strada OK</label>
           <input type="text" class="form-control" id="inputStradaOk" placeholder="COMPORTAMENTO ADEGUATO">
         </div>
+
         <div class="form-group">
           <label for="inputStradaKo">Strada KO</label>
           <input type="text" class="form-control" id="inputStradaKo" placeholder="COMPORTAMENTO INADEGUATO">
         </div>
+
         <div class="form-group">
          <label for="inputTestata">Testata</label>
          <input type="text" class="form-control" id="inputTestata" placeholder="CONSEGUENZE NEGATIVE del comportamento inadeguato">
@@ -68,15 +75,14 @@
             <b>Narrazione</b>
         </label>
         <div class="form-group">
-            <textarea class="form-control" id="myTextArea"></textarea>    
+            <textarea class="form-control" id="myTextArea" rows="15"></textarea>    
         </div>
        
     
     </form>
 
     <script>
-        var step1=1, contSi, contNo, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0;
-
+        var step1=1, contSi, contNo, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0, Distanza;
 
         if (Motivato==0){
             if(document.getElementById("inputSoggetto").value!="")
@@ -117,10 +123,17 @@
             if(document.getElementById("inputTestata").value!="")
                 var testata=document.getElementById("inputTestata").value;
             else
-                testata="CONSEGUENZE NEGATIVE"
+                testata = "CONSEGUENZE NEGATIVE"
+
+            if(document.getElementById("inputDistanza").value!="")
+                var distanza=document.getElementById("inputDistanza").value;
+            else
+                distanza = 0;
             }
 
-        var cont=3;
+        
+
+        
 
         function myFunction() {
             document.getElementById("myTextArea").value+="\n"+cont;
@@ -137,39 +150,22 @@
             contSi=0;
             contNo=0;
 
-            
-
             document.getElementById("myTextArea").value=
-            `Distanza iniziale dall'obiettivo: (${cont})\n${soggetto} vuoi raggiungere ${obiettivo}?`
+            `Distanza iniziale dall'obiettivo: (${distanza})\n${soggetto} vuoi raggiungere ${obiettivo}?`
             document.getElementById("btnSX").innerText="No"
             document.getElementById("btnDX").innerText="Si"
         }
 
        function bottoneSx(){
-        if(step1==1){
-        document.getElementById("myTextArea").value+=` NO!\n Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo!`
-        step1=2
-        document.getElementById("btnSX").innerText="Scorretto"
-        document.getElementById("btnDX").innerText="Corretto"
-    }
+        if(step1==1)
+            document.getElementById("myTextArea").value += ` NO!\n Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo! \n ${ soggetto } vuoi raggiungere ${ obiettivo }?`
         else{
-            document.getElementById("myTextArea").value+=` creatina`
-
+        	distanza+=1
+            contNo+=1
+            document.getElementById("myTextArea").value += `\n ATTENZIONE ${soggetto} la scelta ${comportamentoInade} ti allontana da ${obiettivo}\n Distanza attuale dall'obiettivo: (${distanza}) \n ${soggetto} quale ${comportamento} scegli?`
         }
-
-
-
-            /* if(Motivato==true){
-                print("troppo lontano")
-                if(troppoLontano==true){
-                apre testata popup
-            }
-            contNo++;
-            print(la scelta ko ti allontana... )
-            }
-            print("mancando motivazione non raggiungerai obiettivo")*/
         }
-
+        
         function bottoneDx(){
             if(step1==1){
             document.getElementById("myTextArea").value+=` SI!\n ${soggetto} quale ${comportamento} scegli?`
@@ -178,21 +174,10 @@
             document.getElementById("btnDX").innerText="Corretto"
     }
         else{
-            document.getElementById("myTextArea").value+=` proteine`
-
-        }
-
-
-            /*if(Motivato==true){
-                print("raggiunto obiettivo")
-                if(raggiunto obiettivo==true){
-                    complimenti ed apre il popup
-            }
-            contSI++;
-            print(la scelta ok ti avvicina... )
-            }
-            motivato=1;
-            aggiorna testo dei bottoni*/
+			distanza-=1
+            contSI+=1
+            document.getElementById("myTextArea").value += `\n ${soggetto} la scelta ${comportamentoAde} ti avvicina a ${obiettivo} continua così! \n Distanza attuale dall'obiettivo: (${distanza}) \n ${soggetto} quale ${comportamento} scegli?`
+        } 
         }
 
 
