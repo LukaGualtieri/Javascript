@@ -64,7 +64,7 @@
 
         <center>
         <div class="form-group">
-            <button type="button"class="btn btn-primary" onclick="inizio()">Inizio</button>
+            <button type="button" class="btn btn-primary" onclick="inizio()">Inizio</button>
         </div> 
         <div class="form-group">
             <button type="button" class="btn btn-light" id="btnSX" onclick="bottoneSx()"></button>
@@ -82,58 +82,10 @@
     </form>
 
     <script>
-        var step1=1, contSi, contNo, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0, Distanza;
+        var step1=1, contSi, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0, Distanza;
+        var soggetto,obiettivo,motivazione,contesto,comportamento, comportamentoAde, comportamentoInade, testata, distanza, dist;
 
-        if (Motivato==0){
-            if(document.getElementById("inputSoggetto").value!="")
-                var soggetto=document.getElementById("inputSoggetto").value;
-            else
-                soggetto="SOGGETTO"
-
-            if(document.getElementById("inputObiettivo").value!="")
-                var obiettivo=document.getElementById("inputObiettivo").value;
-            else
-                obiettivo="OBIETTIVO"
-
-            if(document.getElementById("inputFame").value!="")
-                var motivazione=document.getElementById("inputFame").value;
-            else
-                motivazione="MOTIVAZIONE"
-
-            if(document.getElementById("inputLabirinto").value!="")
-                var contesto=document.getElementById("inputLabirinto").value;
-            else
-                contesto="CONTESTO"
-
-            if(document.getElementById("inputStrada").value!="")
-                var comportamento=document.getElementById("inputStrada").value;
-            else
-                comportamento="COMPORTAMENTO"
-
-            if(document.getElementById("inputStradaOk").value!="")
-                var comportamentoAde=document.getElementById("inputStradaOk").value;
-            else
-                comportamentoAde="COMPORTAMENTO ADEGUATO"
-            
-            if(document.getElementById("inputStradaKo").value!="")
-                var comportamentoInade=document.getElementById("inputStradaKo").value;
-            else
-                comportamentoInade="COMPORTAMENTO INADEGUATO"
-
-            if(document.getElementById("inputTestata").value!="")
-                var testata=document.getElementById("inputTestata").value;
-            else
-                testata = "CONSEGUENZE NEGATIVE"
-
-            if(document.getElementById("inputDistanza").value!="")
-                var distanza=document.getElementById("inputDistanza").value;
-            else
-                distanza = 0;
-            }
-
-        
-
-        
+        document.getElementById("inputDistanza").value=3;
 
         function myFunction() {
             document.getElementById("myTextArea").value+="\n"+cont;
@@ -147,53 +99,99 @@
         }
 
         function inizio() {
-            contSi=0;
-            contNo=0;
+        contSi=0;
+        distanza=document.getElementById("inputDistanza").value;
+        if(distanza <1 || distanza>5)
+                distanza=document.getElementById("inputDistanza").value = 3;
+            dist = distanza;
+            max = dist * 2;
 
+        if (Motivato==0){
+            if(document.getElementById("inputSoggetto").value!="")
+                soggetto=document.getElementById("inputSoggetto").value;
+            else
+                soggetto="SOGGETTO"
+
+            if(document.getElementById("inputObiettivo").value!="")
+                obiettivo=document.getElementById("inputObiettivo").value;
+            else
+                obiettivo="OBIETTIVO"
+
+            if(document.getElementById("inputFame").value!="")
+                motivazione=document.getElementById("inputFame").value;
+            else
+                motivazione="MOTIVAZIONE"
+
+            if(document.getElementById("inputLabirinto").value!="")
+                contesto=document.getElementById("inputLabirinto").value;
+            else
+                contesto="CONTESTO"
+
+            if(document.getElementById("inputStrada").value!="")
+                comportamento=document.getElementById("inputStrada").value;
+            else
+                comportamento="COMPORTAMENTO"
+
+            if(document.getElementById("inputStradaOk").value!="")
+                comportamentoAde=document.getElementById("inputStradaOk").value;
+            else
+                comportamentoAde="COMPORTAMENTO ADEGUATO"
+            
+            if(document.getElementById("inputStradaKo").value!="")
+                comportamentoInade=document.getElementById("inputStradaKo").value;
+            else
+                comportamentoInade="COMPORTAMENTO INADEGUATO"
+
+            if(document.getElementById("inputTestata").value!="")
+                testata=document.getElementById("inputTestata").value;
+            else
+                testata = "CONSEGUENZE NEGATIVE"
+            }
+            
             document.getElementById("myTextArea").value=
-            `Distanza iniziale dall'obiettivo: (${distanza})\n${soggetto} vuoi raggiungere ${obiettivo}?`
+            `Distanza iniziale dall'obiettivo: (${dist})\n${soggetto} vuoi raggiungere ${obiettivo}?`
             document.getElementById("btnSX").innerText="No"
             document.getElementById("btnDX").innerText="Si"
         }
 
        function bottoneSx(){
-        if(step1==1)
+        if(contSi == 0)
             document.getElementById("myTextArea").value += ` NO!\n Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo! \n ${ soggetto } vuoi raggiungere ${ obiettivo }?`
         else{
-        	distanza+=1
-            contNo+=1
-            document.getElementById("myTextArea").value += `\n ATTENZIONE ${soggetto} la scelta ${comportamentoInade} ti allontana da ${obiettivo}\n Distanza attuale dall'obiettivo: (${distanza}) \n ${soggetto} quale ${comportamento} scegli?`
+            if(dist < max){
+            dist ++;
+            document.getElementById("myTextArea").value += `\n ATTENZIONE ${soggetto} la scelta ${comportamentoInade} ti allontana da ${obiettivo}\n Distanza attuale dall'obiettivo: (${dist}) \n ${soggetto} quale ${comportamento} scegli?`
         }
+        if(dist >= max){
+            document.getElementById("myTextArea").value += `/n  :-( ${soggetto} ti sei allontanato troppo hai scelto la strada chiusa ${comportamentoInade} e ti sei scontarto con ${testata}`
+            popup("https://www.umanetexpo.net/expo2015Server/UECDL/U-ECDL/img/PaginaTopolinoTontolino.htm");
         }
+        }  
+    }
         
         function bottoneDx(){
-            if(step1==1){
+            if(contSi == 0){
             document.getElementById("myTextArea").value+=` SI!\n ${soggetto} quale ${comportamento} scegli?`
-            step1=2
             document.getElementById("btnSX").innerText="Scorretto"
             document.getElementById("btnDX").innerText="Corretto"
+            contSi ++;
     }
         else{
+            if(distanza > -1){
 			distanza-=1
-            contSI+=1
             document.getElementById("myTextArea").value += `\n ${soggetto} la scelta ${comportamentoAde} ti avvicina a ${obiettivo} continua così! \n Distanza attuale dall'obiettivo: (${distanza}) \n ${soggetto} quale ${comportamento} scegli?`
-        } 
+            }
+            
+        if(distanza==0){
+            document.getElementById("myTextArea").value += `\n Coraggio ci sei quasi fai l'ultimo passo! \n ${soggetto} quale ${comportamento} scegli?`
         }
 
-
-        function myFunction2() {
-            document.getElementById("narrazione").innerText= 
-            `${soggetto} vuoi raggiungere ${obiettivo}? NO!
-            Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo!
-            ${soggetto} vuoi raggiungere ${obiettivo}? SI!
-            ${soggetto} quale ${comportamento} scegli?
-            ATTENZIONE ${soggetto} la scelta ${comportamentoInade} ti allontana da ${obiettivo}
-            :-( ${soggetto} ti sei allontanato troppo hai scelto la strada chiusa ${comportamentoInade} e ti sei scontarto con ${testata}
-            ${soggetto} quale ${comportamento} scegli?
-            ${soggetto} la scelta ${comportamentoAde} ti avvicina a ${obiettivo} continua così!
-            Coraggio ci sei quasi fai l'ultimo passo!
-            :-) COMPLIMENTI ${soggetto} hai raggiunto ${obiettivo}!!!`
+        if(distanza==-1){
+            document.getElementById("myTextArea").value += `\n :-) COMPLIMENTI ${soggetto} hai raggiunto ${obiettivo}!!!`
+            popup("https://www.umanetexpo.net/expo2015Server/UECDL/U-ECDL/img/PaginaTopolinoVolpino.htm");
         }
+    }
+    }
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
