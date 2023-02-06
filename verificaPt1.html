@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Verifica parte 1/2 Luka Gualtieri</title>
+    <p id="narrazione">
+        SOGGETTO OPPRESSO vuoi reagire ad oppressione esercitata da SOGGETTO OPPRESSORE? NO!<br>
+        Mancando MOTIVAZIONE per reagire a SOGGETTO OPPRESSORE. SOGGETTO OPPRESSO nel contesto SITUAZIONE rimarrai oppresso!<br>
+        SOGGETTO OPPRESSO vuoi reagire ad oppressione esercitata da SOGGETTO OPPRESSORE? SI!<br>
+        SOGGETTO OPPRESSO quale reazione scegli?<br>
+        ATTENZIONE SOGGETTO OPPRESSO la scelta COMPORTAMENTO INADEGUATO ti allontana dal riuscire a mandare un FEEDBACK efficace a SOGGETTO OPPRESSORE<br>
+        :-( SOGGETTO OPPRESSO ti sei allontanato troppo hai scelto la strada chiusa COMPORTAMENTO INADEGUATO e ti sei scontrato con CONSEGUENZE NEGATIVE<br>
+        SOGGETTO OPPRESSO quale reazione scegli?<br>
+        SOGGETTO OPPRESSO la scelta COMPORTAMENTO ADEGUATO ti allontana a mandare un FEEDBACK efficace a SOGGETTO OPPRESSORE continua così!<br>
+        Coraggio ci sei quasi fai l'ultimo passo!<br>
+    </p>
+    <br>
+
+  </head>
+
+  <body>
+    <form>
+        <div class="form-group">
+          <label for="inputOppresso">Oppresso</label>
+          <input type="text" class="form-control" id="inputOppresso" placeholder="SOGGETTO oppresso" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputOppressore">Oppressore</label>
+          <input type="text" class="form-control" id="inputOppressore" placeholder="SOGGETTO oppressore" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputSituazione">Situazione</label>
+          <input type="text" class="form-control" id="inputSituazione" placeholder="SITUAZIONE in cui si svolge l'azione" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputMotivazione">Motivazione</label>
+          <input type="text" class="form-control" id="inputMotivazione" placeholder="MOTIVAZIONE per reagire ad oppressione" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputFeedback">Feedback</label>
+          <input type="text" class="form-control" id="inputFeedback" placeholder="FEEDBACK da inviare a oppressore" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputStradaOk">Strada OK</label>
+          <input type="text" class="form-control" id="inputStradaOk" placeholder="COMPORTAMENTO ADEGUATO per reagire ad oppressione" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+          <label for="inputStradaKo">Strada KO</label>
+          <input type="text" class="form-control" id="inputStradaKo" placeholder="COMPORTAMENTO INADEGUATO per reagire ad oppressione" oninput="myFunction()">
+        </div>
+        <div class="form-group">
+         <label for="inputConsNeg">Conseguenze negative</label>
+         <input type="text" class="form-control" id="inputConsNeg" placeholder="CONSEGUENZE NEGATIVE del comportamento inadeguato" oninput="myFunction()">
+        </div>
+    </form>
+
+    <script>
+        function myFunction() {
+            if(document.getElementById("inputOppresso").value!="")
+                var oppresso=document.getElementById("inputOppresso").value;
+            else
+                oppresso="OPPRESSO"
+
+            if(document.getElementById("inputOppressore").value!="")
+                var oppressore=document.getElementById("inputOppressore").value;
+            else
+                oppressore="OPPRESSORE"
+
+            if(document.getElementById("inputSituazione").value!="")
+                var situazione=document.getElementById("inputSituazione").value;
+            else
+                situazione="SITUAZIONE"
+
+            if(document.getElementById("inputMotivazione").value!="")
+                var motivazione=document.getElementById("inputMotivazione").value;
+            else
+                motivazione="MOTIVAZIONE"
+
+            if(document.getElementById("inputFeedback").value!="")
+                var feedback=document.getElementById("inputFeedback").value;
+            else
+                feedback="FEEDBACK"
+
+            if(document.getElementById("inputStradaOk").value!="")
+                var comportamentoAde=document.getElementById("inputStradaOk").value;
+            else
+                comportamentoAde="COMPORTAMENTO ADEGUATO"
+            
+            if(document.getElementById("inputStradaKo").value!="")
+                var comportamentoInade=document.getElementById("inputStradaKo").value;
+            else
+                comportamentoInade="COMPORTAMENTO INADEGUATO"
+
+            if(document.getElementById("inputConsNeg").value!="")
+                var consNeg=document.getElementById("inputConsNeg").value;
+            else
+                consNeg="CONSEGUENZE NEGATIVE"
+
+            document.getElementById("narrazione").innerText= 
+            `${oppresso} vuoi reagire ad oppressione esercitata da ${oppressore}? NO!
+             Mancando ${motivazione} per reagire a ${oppressore}. ${oppresso} nel contesto ${situazione} rimarrai oppresso!
+             ${oppresso} vuoi reagire ad oppressione esercitata da ${oppressore}? SI!
+             ${oppresso} quale reazione scegli?
+             ATTENZIONE ${oppresso} la scelta ${comportamentoInade} ti allontana dal riuscire a mandare un ${feedback} efficace a ${oppressore}
+             :-( ${oppresso} ti sei allontanato troppo hai scelto la strada chiusa ${comportamentoInade} e ti sei scontrato con ${consNeg}
+             ${oppresso} quale reazione scegli?
+             ${oppresso} la scelta ${comportamentoAde} ti allontana a mandare un ${feedback} efficace a ${oppressore} continua così!
+             Coraggio ci sei quasi fai l'ultimo passo!`           
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
