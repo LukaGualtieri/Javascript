@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://www.umanetexpo.net/expo2015Server/UECDL/css/bootstrap2.min.css">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="https://www.umanetexpo.net/expo2015Server/UECDL/css/style.css">
+    <!-- Color CSS -->
+    <link rel="stylesheet" href="https://www.umanetexpo.net/expo2015Server/UECDL/css/themes.css">
+    <!-- Bootstrap -->
+    <script src="https://www.umanetexpo.net/expo2015Server/UECDL/js/bootstrap.min.js"></script>
+    <title>Verifica Pt2 Luka Gualtieri</title>
+</head>
+
+<body class='theme-blue' data-layout-sidebar="fixed" data-layout-topbar="fixed">
+    <div class="container-fluid" id="content">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box">
+                    <div class="box-title">
+                        <h3>Simulazione</h3>
+                    </div>
+
+                    <div class="box-content" id="storia">
+                    </div>
+
+                    <div class="box-content">
+                        <form name="parametri">
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Autista</b></label>
+                                <div class="controls">
+                                    <input type="text"  placeholder="SOGGETTO protagonista"  class="input-xxlarge" name="txtAutista" id="txtAutista">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Destinazione</b></label>
+                                <div class="controls">
+                                    <input type="text"   placeholder="OBIETTIVO da raggiungere" class="input-xxlarge" name="txtDestinazione" id="txtDestinazione">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Carburante</b></label>
+                                <div class="controls">
+                                    <input type="text"   placeholder="MOTIVAZIONE che spinge verso l'obiettivo" class="input-xxlarge"  name="txtCarburante" id="txtCarburante">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Luogo</b></label>
+                                <div class="controls">
+                                    <input type="text"   placeholder="CONTESTO in cui si svolge l'azione" class="input-xxlarge" name="txtLuogo" id="txtLuogo">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Strada</b></label>
+                                <div class="controls">
+                                    <input type="text"  placeholder="COMPORTAMENTO"  class="input-xxlarge" name="txtStrada" id="txtStrada">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Strada_OK</b></label>
+                                <div class="controls">
+
+                                    <input type="text"  placeholder="COMPORTAMENTO ADEGUATO"  class="input-xxlarge" name="txtStrada_OK" id="txtStrada_OK">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Strada_KO</b></label>
+                                <div class="controls">
+                                    <input type="text"  placeholder="COMPORTAMENTO INADEGUATO" class="input-xxlarge" name="txtStrada_KO"  id="txtStrada_KO">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Cespugli</b></label>
+                                <div class="controls">
+                                    <input type="text"  placeholder="FEEDBACK"   class="input-xxlarge" name="txtCespugli" id="txtCespugli">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Lupo</b></label>
+                                <div class="controls">
+                                    <input type="text"  placeholder="CONSEGUENZE NEGATIVE"  class="input-xxlarge" name="txtLupo" id="txtLupo">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label"><b>Cestino</b></label>
+                                <div class="controls">
+                                    <input type="text"   placeholder="ATTACCAMENTI da lasciare andare" class="input-xxlarge"  name="txtCestino" id="txtCestino">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="textfield" class="control-label">
+                                    <b>Distanza</b>
+                                </label>
+                                <div class="controls">
+                                    <input type="text" placeholder="Num. da 1 a 5" class="input-small"
+                                           name="txtDistanza" id="txtDistanza" value="3">
+                                </div>
+                            </div>
+    
+                            <div class="form-actions">
+                                <center>
+                                    <p>
+                                        <img class="imground" name="situazione" src="naviga_rete_della_vita/Intro.gif">
+                                    </p>
+                                    <p>
+                                        <input type="button" value="INIZIO" name="BInizia" class="btn-primary"
+                                               onClick="inizio()">
+                                    </p>
+                                    <p>
+                                        <input type="button" value="  " name="BSx" onClick="bottoneSx()"
+                                               class="btn">
+                                        <input type="button" value="  " name="BDx" onClick="bottoneDx()"
+                                               class="btn">
+                                    </p>
+                                </center>
+                            </div>
+                            </p>
+                            <div class="control-group">
+                                <label for="textarea" class="control-label">
+                                    <b>Narrazione</b>
+                                </label>
+                                <div class="controls">
+                                    <textarea name="Storia" id="textarea" rows="15" class="input-block-level"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+ <script>
+        var step1=1, contSi, Topolino, Formaggio, Fame, Labirinto, Strada, Strada_OK, Strada_KO, Testata, Motivato=0, Distanza;
+        var soggetto,obiettivo,motivazione,contesto,comportamento, comportamentoAde, comportamentoInade, testata, distanza, dist;
+
+        document.getElementById("txtDistanza").value=3;
+
+        function myFunction() {
+            document.getElementById("textarea").value+="\n"+cont;
+            cont++;
+            document.getElementById("textarea").scrollTop=document.getElementById("myTextArea").scrollHeight;        
+        }
+
+        function popup(pagina) {
+            window.open(pagina, '', 'width=560, height=390, left=500, top=100, resizable=yes, toolbar=no, scrollbar=no, status=no');
+        }
+
+        function inizio() {
+        contSi=0;
+        distanza=document.getElementById("txtDistanza").value;
+        if(distanza <1 || distanza>5)
+                distanza=document.getElementById("txtDistanza").value = 3;
+            dist = distanza;
+            max = dist * 2;
+
+        if (Motivato==0){
+            if(document.getElementById("txtAutista").value!="")
+                soggetto=document.getElementById("txtAutista").value;
+            else
+                soggetto="SOGGETTO"
+
+            if(document.getElementById("inputObiettivo").value!="")
+                obiettivo=document.getElementById("inputObiettivo").value;
+            else
+                obiettivo="OBIETTIVO"
+
+            if(document.getElementById("inputFame").value!="")
+                motivazione=document.getElementById("inputFame").value;
+            else
+                motivazione="MOTIVAZIONE"
+
+            if(document.getElementById("inputLabirinto").value!="")
+                contesto=document.getElementById("inputLabirinto").value;
+            else
+                contesto="CONTESTO"
+
+            if(document.getElementById("inputStrada").value!="")
+                comportamento=document.getElementById("inputStrada").value;
+            else
+                comportamento="COMPORTAMENTO"
+
+            if(document.getElementById("inputStradaOk").value!="")
+                comportamentoAde=document.getElementById("inputStradaOk").value;
+            else
+                comportamentoAde="COMPORTAMENTO ADEGUATO"
+            
+            if(document.getElementById("inputStradaKo").value!="")
+                comportamentoInade=document.getElementById("inputStradaKo").value;
+            else
+                comportamentoInade="COMPORTAMENTO INADEGUATO"
+
+            if(document.getElementById("inputTestata").value!="")
+                testata=document.getElementById("inputTestata").value;
+            else
+                testata = "CONSEGUENZE NEGATIVE"
+            }
+            
+            document.getElementById("myTextArea").value=
+            `Distanza iniziale dall'obiettivo: (${dist})\n${autista} vuoi raggiungere ${destinazione}?`
+            document.getElementById("btnSX").innerText="No"
+            document.getElementById("btnDX").innerText="Si"
+        }
+
+       function bottoneSx(){
+        if(contSi == 0)
+            document.getElementById("textarea").value += ` NO!\n Mancando ${motivazione} per raggiungere ${obiettivo}, ${soggetto} nel contesto ${contesto} non raggiungerai l'obiettivo! \n ${ soggetto } vuoi raggiungere ${ obiettivo }?`
+        else{
+            if(dist < max){
+            dist ++;
+            document.getElementById("textarea").value += `\n ATTENZIONE ${autista} la scelta ${comportamentoInade} ti allontana da ${obiettivo}\n Distanza attuale dall'obiettivo: (${dist}) \n ${soggetto} quale ${comportamento} scegli?`
+        }
+        if(dist >= max){
+            document.getElementById("textarea").value += `/n  :-( ${soggetto} ti sei allontanato troppo hai scelto la strada chiusa ${comportamentoInade} e ti sei scontarto con ${testata}`
+            popup("https://www.umanetexpo.net/expo2015Server/UECDL/U-ECDL/img/PaginaTopolinoTontolino.htm");
+        }
+        }  
+        }
+        
+        function bottoneDx(){
+            if(contSi == 0){
+            document.getElementById("textarea").value+=` SI!\n ${soggetto} quale ${comportamento} scegli?`
+            document.getElementById("btnSX").innerText="Comportamento inadeguato"
+            document.getElementById("btnDX").innerText="Comportamento adeguato"
+            contSi ++;
+            }
+        else{
+            if(distanza > -1){
+			distanza-=1
+            document.getElementById("textarea").value += `\n ${soggetto} la scelta ${comportamentoAde} ti avvicina a ${obiettivo} continua così! \n Distanza attuale dall'obiettivo: (${distanza}) \n ${soggetto} quale ${comportamento} scegli?`
+            }
+            
+        if(distanza==0){
+            document.getElementById("textarea").value += `\n Coraggio ci sei quasi fai l'ultimo passo! \n ${soggetto} quale ${comportamento} scegli?`
+        }
+
+        if(distanza==-1){
+            document.getElementById("textarea").value += `\n :-) COMPLIMENTI ${soggetto} hai raggiunto ${obiettivo}!!!`
+            popup("https://www.umanetexpo.net/expo2015Server/UECDL/U-ECDL/img/PaginaTopolinoVolpino.htm");
+        }
+        }
+        }
+    </script>
+</html>
