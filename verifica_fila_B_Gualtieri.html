@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifica Gualtieri Luka Fila B</title>
+</head>
+<body>
+<h3>Compagnia Noleggio Lukitoss.SRL</h3>
+<br>
+<br>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Aggiungi Veicoli
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aggiungi Veicolo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <p>Tipo:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="tipo" placeholder="inserisci il tipo">
+            </div>
+
+            <p>Marca:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="marca" placeholder="inserisci la marca">
+            </div>
+
+            <p>Modello:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="modello" placeholder="inserisci il modello">
+            </div>
+
+            <p>Anno:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="anno" placeholder="inserisci l'anno">
+            </div>
+
+            <p>Prezzo Noleggio Orario:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="prezzoNoleggioOrario" placeholder="inserisci il prezzo orario">
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <button type="button" class="btn btn-primary" onclick="aggiungi()">Aggiungi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="tab">
+    <table class="table">
+        <thead id="thead" class="table">
+            <tr>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modello</th>
+                <th>Anno</th>
+                <th>Prezzo Orario</th>
+            </tr>
+        </thead>
+            <tbody id="tbody"></tbody>
+    </table>
+</div>
+
+<script>
+    class Veicolo{
+        constructor(tipo, marca, modello, anno, prezzoNoleggioOrario){
+            this.tipo=tipo;
+            this.marca=marca;
+            this.modello=modello;
+            this.anno=anno;
+            this.prezzoNoleggioOrario=prezzoNoleggioOrario;   
+        }
+
+        calcolaCostoNoleggio(ore){
+            var costo = ore*this.prezzoNoleggioOrario;
+            return costo;
+        }
+    }
+
+    class Cliente{
+        constructor(nome, cognome, numPatente, noleggiEffettuati){
+            this.nome=nome;
+            this.cognome=cognome;
+            this.numPatente=numPatente;
+            this.noleggiEffettuati=noleggiEffettuati;
+            this.veicoliNoleggiatiCliente=[];    
+        }
+
+        noleggiaVeicolo(veicolo){
+            this.veicoliNoleggiatiCliente.push(veicolo);
+        }
+
+        restituisciVeicolo(veicolo){
+            this.veicoliNoleggiatiCliente.splice(veicolo);
+        }
+    }
+
+    class CompagniaNoleggio{
+        constructor(){
+            this.inventario=[];
+            this.clienti=[]
+            this.veicoliNoleggiati=[];    
+        }
+
+        aggiungiVeicolo(veicolo){
+            this.inventario.push(veicolo);
+        }
+
+        registraCliente(cliente){
+            this.clienti.push(cliente);
+        }
+        
+        effettuaNoleggio(cliente, veicolo){
+            if(cliente in this.clienti)
+                this.veicoliNoleggiati.push(veicolo);
+        }
+
+        restituisciVeicolo(cliente, veicolo){
+            if(cliente in this.clienti)
+                this.veicoliNoleggiati.splice(veicolo);
+        }
+
+        elencoVeicoliNoleggiati(cliente){
+            ///
+        }
+    }
+        
+    function aggiungi(){
+            let tipo=document.getElementById("tipo").value;
+            let marca=document.getElementById("marca").value;
+            let modello=document.getElementById("modello").value;
+            let anno=parseInt(document.getElementById("anno").value);
+            let prezzoOrario=parseInt(document.getElementById("prezzoNoleggioOrario").value);
+
+            veicolo=new Veicolo(tipo, marca, modello, anno, prezzoOrario);
+            
+            let tbody=document.getElementById("tbody");
+            const tr=document.createElement("tr");
+            let td=document.createElement("td");
+
+            td.innerText=`${tipo}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+
+            td.innerText=`${marca}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+
+            td.innerText=`${modello}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+
+            td.innerText=`${anno}`;
+            tr.appendChild(td);
+            td=document.createElement("td");
+
+            td.innerText=`${prezzoOrario}`;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+
+            document.getElementById("tipo").value="";
+            document.getElementById("marca").value="";
+            document.getElementById("modello").value="";
+            document.getElementById("anno").value;
+            document.getElementById("prezzoNoleggioOrario").value;            
+        }
+
+        //Creazione compagnia 
+        const compagniaNoleggio = new CompagniaNoleggio();
+
+        //Creazione Veicolo 
+        const veicolo1 = new Veicolo('auto', 'Ferrari', 'F8', '2023', 40);
+        const veicolo2 = new Veicolo('moto', 'Tm', 'Smr 125', '2024', 20);
+        const veicolo3 = new Veicolo('auto', 'Lamborghini', 'Huracan', '2023', 50);
+        const veicolo4 = new Veicolo('auto', 'Ktm', 'Sx 125', '2024', 25);
+
+        //Aggiunta Veicolo 
+        compagniaNoleggio.aggiungiVeicolo(veicolo1);
+        compagniaNoleggio.aggiungiVeicolo(veicolo2);
+        compagniaNoleggio.aggiungiVeicolo(veicolo3);
+        compagniaNoleggio.aggiungiVeicolo(veicolo4);
+
+        //Creazione Cliente 
+        const cliente1 = new Cliente('Luka', 'Gualtieri', 123456, 2);
+        const cliente2 = new Cliente('Matteo', 'Ranzani', 654321, 1);
+
+        //Aggiunta Cliente 
+        compagniaNoleggio.registraCliente(cliente1);
+        compagniaNoleggio.registraCliente(cliente2);
+
+        //Registro un Noleggio
+        compagniaNoleggio.effettuaNoleggio(cliente1, veicolo3);
+        compagniaNoleggio.effettuaNoleggio(cliente2, veicolo1);
+
+        //Registro una Restituzione
+        compagniaNoleggio.restituisciVeicolo(cliente2, veicolo1);
+
+        //Elenco veicoli attualmente noleggiati
+        lista = compagniaNoleggio.elencoVeicoliNoleggiati(cliente1);
+        console.log("Lista veicoli noleggiati dal cliente 1: ", lista)
+   
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
