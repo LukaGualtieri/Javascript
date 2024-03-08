@@ -24,7 +24,7 @@
     </div>
 <script>
 
-var access_token="BQDwVJepVyIh0HCcPty1KYSAE76qeZVwdzmU8wgP1ruIJEF1QHVhrqomnNRd2QY3SieuZ5F-wIlaFxnOSNM4vC4QPxpJzC85-ZaXdjRk6Xw8xEmmvGHcCWztS4bPevEzLXlHLOJXrlVyi75zJmZVdpajlBeAF3qTmcu_1bZICq7oeCXyIzlv3MRJ1k9p4qYnIjhv18UjsBxDe3FZUrleFdxS";
+var access_token="BQBIesQBhIYNDywSENzAtWYawg3sg9yJTCtGXVCP1wSIxmbl0dlP7hIaShrZtce_QBtZ5i33X2NNYkXeMcc2OCdUIKQspHOMabxLMl9D51OcU1gyloE8kl3KXkJSPHX5mu-FCMDpiwb4OlGv4jWZu1d9cfwg8FtryrrlQHOd-3-kK-JrzChn1IkR7-ciEP0UcDLkImtxl1hHFyBC0fdrmpe7";
 var album_id = "2v7KXdLrb81rGL9G7jwcjF";
 
 async function fetchAlbumData(){
@@ -32,7 +32,7 @@ async function fetchAlbumData(){
 
         const response = await fetch(`https://api.spotify.com/v1/albums/${album_id}`, {
             headers: {
-                'Authorization': 'Bearer' + access_token
+                'Authorization': 'Bearer ' + access_token
             }
         });
 
