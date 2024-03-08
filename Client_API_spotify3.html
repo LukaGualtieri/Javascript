@@ -115,7 +115,7 @@ async function renderTable2(album_id) {
     const album = jsonAlbumData["name"];
     const copertina = jsonAlbumData["images"][2]["url"];
     const ascolta = jsonAlbumData["external_urls"]["spotify"];
-    riga = `<tr><td>${artista}</td><td>${album}</td><td><img src="${copertina}"></td><td><a target="_blank" href=${ascolta}>Riproduci</a></td></tr>`;
+    riga = `<tr><td>${artista}</td><td>${album}</td><td><img src="${copertina}"></td><td><a target="_blank" href=${ascolta}><img src="https://hd2.tudocdn.net/1046688?w=550&h=550" height="64" width="64"></a></td></tr>`;
     document.getElementById("tbody2").innerHTML=riga;
     
   } catch (error) {
