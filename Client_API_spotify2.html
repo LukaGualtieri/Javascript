@@ -12,7 +12,7 @@
     <br>
     <div id="tab">
         <table class="table table-bordered">
-            <thead id="thead" class="table">
+            <thead id="thead" class="table-light">
                     <th>Autore</th>
                     <th>Titolo</th>
                     <th>Copertina</th>
@@ -23,7 +23,7 @@
     </div>
 <script defer>
 
-var access_token="BQBIesQBhIYNDywSENzAtWYawg3sg9yJTCtGXVCP1wSIxmbl0dlP7hIaShrZtce_QBtZ5i33X2NNYkXeMcc2OCdUIKQspHOMabxLMl9D51OcU1gyloE8kl3KXkJSPHX5mu-FCMDpiwb4OlGv4jWZu1d9cfwg8FtryrrlQHOd-3-kK-JrzChn1IkR7-ciEP0UcDLkImtxl1hHFyBC0fdrmpe7";
+var access_token="BQB9KWUeoXo2JFGzDHovlgAWvLBoBjQKbzy27_95mNGZLUExmtX10p4wvAmOrADzCiKQsFC7NpVqTFTXLi8sQRsbjNHDyfPgzMyAtEu_es0cRnbU-L0yRLro_7zOvDua4UNGeH-MGLpc8ZC4GLVIMOpW_BhQSOQg05vcjuFmmcaHTMSPnXYOHRhbIbWNRlX4EBdPpgg4TOm1JhFcS_Kha7Mb";
 
 async function fetchRecentlyPlayed(){
     try {
@@ -57,7 +57,7 @@ async function renderTable() {
         const nomeCanzone = jsonRecentlyPlayed["items"][track]["track"]["name"];
         const copertina = jsonRecentlyPlayed["items"][track]["track"]["album"]["images"][2]["url"];
         const ascolta = jsonRecentlyPlayed["items"][track]["track"]["album"]["external_urls"]["spotify"];
-        riga += `<tr><td>${artista}</td><td>${nomeCanzone}</td><td><img src="${copertina}"></td><td><a target="_blank" href=${ascolta}>Riproduci</a></td></tr>`;
+        riga += `<tr><td>${artista}</td><td>${nomeCanzone}</td><td><img src="${copertina}"></td><td><a target="_blank" href=${ascolta}><img src="https://hd2.tudocdn.net/1046688?w=550&h=550" height="64" width="64"></a></td></tr>`;
     }
     document.getElementById("tbody").innerHTML=riga;
   } catch (error) {
