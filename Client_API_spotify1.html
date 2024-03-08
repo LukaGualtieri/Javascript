@@ -24,7 +24,7 @@
     </div>
 <script>
 
-var access_token="BQBIesQBhIYNDywSENzAtWYawg3sg9yJTCtGXVCP1wSIxmbl0dlP7hIaShrZtce_QBtZ5i33X2NNYkXeMcc2OCdUIKQspHOMabxLMl9D51OcU1gyloE8kl3KXkJSPHX5mu-FCMDpiwb4OlGv4jWZu1d9cfwg8FtryrrlQHOd-3-kK-JrzChn1IkR7-ciEP0UcDLkImtxl1hHFyBC0fdrmpe7";
+var access_token="BQD0d7rHOnXfo1ic6OZ09Y5Wf6S4FG3qXdStpIaZ2GEA4lLT0O3oKlFdthmuqCdOCDjI1OVLuufrfzWevv4D0J_4JA5UEEQUGAcIL8yeJMLcqOuf8SIoyEHRtbK3QyFajcjMk7jWqwndJixqK0jRLWQk5wDr0Ho5xMzlrEm6OO81IATYqbSl-FinP6vITaYUNOWGjN_u1FGlJPxXg_Am7OVs"
 var album_id = "2v7KXdLrb81rGL9G7jwcjF";
 
 async function fetchAlbumData(){
@@ -53,11 +53,6 @@ async function renderTable() {
     const jsonAlbumData = await fetchAlbumData();
     let tbody="";
     let riga;
-    console.log(jsonAlbumData)
-    console.log(jsonAlbumData["artists"][0]["name"])
-    console.log(jsonAlbumData["name"])
-    console.log(jsonAlbumData["images"][2]["url"])
-    console.log(jsonAlbumData["external_urls"]["spotify"])
     const artista = jsonAlbumData["artists"][0]["name"];
     const album = jsonAlbumData["name"];
     const copertina = jsonAlbumData["images"][2]["url"];
