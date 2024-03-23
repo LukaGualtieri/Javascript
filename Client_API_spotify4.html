@@ -26,21 +26,24 @@
 
     <div id="tab2" style="display: none;">
         <button class="btn btn-primary mt-1 mb-1" id="btnIndietroUtente" onclick="indietro()">Indietro</button>
-        <h4>Dettagli dell'album: </h4> 
         <br>
-        <div id="dettagli"></div>
+        <br>
+        <h4>Dettagli dell'album: </h4> 
+        <div id="albumInfo"></div>
+        <div id="spotifyPlayer2"></div>
+        <br>
         <table class="table table-bordered">
             <thead id="thead" class="table-light">
                     <th>Ascolta</th>  
                     <th>Titolo</th>
-                    <th>Copertina</th>
+                    <th>Durata</th>
             </thead>
                 <tbody id="tbody2"></tbody>
         </table>
     </div>
 <script defer>
 
-var access_token = "BQCl26dfLq_r_mhfNTXmlwIsYhgVTwXYlVMWkbGn7H7Egw_5mP2MxElDBoyr7TDzVqYIOdvyAbn6KBMPe9JrdHasCQsvzioA7zLvc8RaP6IUpXu1r7Q0rl_zxiIrer06aMxQX1VCrVi0SslIGO_oRdyi7i4lp85x7mAXTGj8W45TpXLTQ-oMtR9VoWS2YF691JsmxtHDvK7qMz4F6xjSVhVF";
+var access_token = "BQATLdh4sm269q_dRmdMD-pCMrtVjMRKMQrMVJjhvW4FLzEqhzp54SqcQn72dU6-Hqwft6qPrXhISUfS5b_NxDw8VKppq3qpJqD4nIXvrXNCXnqF2KV9F3Sq2hPadqmZusaUmyLsE7vEtx52Oc-W8IrSA6VReryptBZ44VQ0JERvYbWuZwxU7rdVo6hKaAfXDie3rmSAAWCa0wHSoSTlvSK2";
 
 async function fetchRecentlyPlayed(){
     try {
@@ -62,6 +65,7 @@ async function fetchRecentlyPlayed(){
         return null;
     }
 }
+
 
 async function renderTable() {
   try {
@@ -85,6 +89,7 @@ async function renderTable() {
 }
 renderTable();
 
+
 async function playSong(songId, nomeCanzone){
     const playerDiv = document.getElementById('spotifyPlayer');
     const playerHtml = `
@@ -98,19 +103,17 @@ async function playSong(songId, nomeCanzone){
         playerDiv.innerHTML = playerHtml;
 }
 
+
 function dettaglioAlbum(album_id) {
     document.getElementById("tab1").style.display = "none";
     document.getElementById("tab2").style.display = "block";
     renderTable2(album_id);
 }
 
+
 function indietro() {
     document.getElementById("tab2").style.display = "none";
     document.getElementById("tab1").style.display = "block";
-}
-
-function dettagli() {
-
 }
 
 
@@ -135,38 +138,73 @@ async function fetchAlbumData(album_id){
     }
 }
 
+
+function msToTime(msDurata) {
+  var millisecondi = parseInt((msDurata % 1000) / 100),
+    secondi = parseInt((msDurata / 1000) % 60),
+    minuti = parseInt((msDurata / (1000 * 60)) % 60),
+    ore = parseInt((msDurata / (1000 * 60 * 60)) % 24);
+
+  ore = (ore < 10) ? "0" + ore : ore;
+  minuti = (minuti < 10) ? "0" + minuti : minuti;
+  secondi = (secondi < 10) ? "0" + secondi : secondi;
+
+  return ore + ":" + minuti + ":" + secondi;
+}
+
+
+async function playSong2(songId, nomeCanzone){
+    const playerDiv = document.getElementById('spotifyPlayer2');
+    const playerHtml = `
+    <div>
+        <iframe src="https://open.spotify.com/embed/track/${songId}"
+                width="300" height="80" frameborder="0" allowtrasparency="true" allow="encrypted-media">
+        </iframe>
+        </div>        
+        `;
+        playerDiv.innerHTML = playerHtml;
+}
+
+
 async function renderTable2(album_id) {
   try {
     const jsonAlbumData = await fetchAlbumData(album_id);
-    let tbody="";
-    let riga;
+    let tbody = "";
     const album = jsonAlbumData["name"];
-    var copertina = jsonAlbumData["images"][2]["url"];
-    var nomeCanzone = jsonAlbumData["items"][track]["track"]["name"];
-    const durata = msToTime(jsonAlbumData["items"][track]["track"]["duration_ms"]);
-    var songId = jsonAlbumData["items"][track]["track"]["id"];
-    riga = `<tr><td><button type="button" class="btn btn-dark" onclick="playSong('${songId}','${nomeCanzone.replace(/'/g, "%27")}')">Play</button></td><td>${album}</td><td>${durata}</td></tr>`;  
-    document.getElementById("tbody2").innerHTML=riga;
+    const copertina = jsonAlbumData["images"][1]["url"];
+    var albumSong = document.getElementById("albumInfo");
+    albumSong.innerHTML = `<img src="${copertina}" alt="copertina album" width=200><br><br><h4>Nome dell'album: ${album}</h4>`
+  
+    for (let track = 0; track < jsonAlbumData["tracks"]["items"].length; track++) {
+      var nomeCanzone = jsonAlbumData["tracks"]["items"][track]["name"];
+      const durata = msToTime(jsonAlbumData["tracks"]["items"][track]["duration_ms"]);
+      var songId = jsonAlbumData["tracks"]["items"][track]["id"];
+                                                                   
+      tbody += `<tr><td><button type="button" class="btn btn-dark" onclick="playSong2('${songId}','${nomeCanzone.replace(/'/g, "%27")}')">Play</button></td><td>${nomeCanzone}</td><td>${durata}</td></tr>`;
+    }
+    document.getElementById("tbody2").innerHTML = tbody;
   } catch (error) {
     console.log("Errore durante il rendering della tabella: ", error)
   }
 }
 renderTable2();
 
+
+//VERSIONE DEL PROF
 /*
 async function renderTable2(album_id) {
   try {
     var songs = await fetchAlbumData(album_id);
     let tbody="";
-    var immagine = songs.images[0].url;
+    var immagine = songs["images"][1]["url"];
     var titolo = songs.name;
     songs = songs.tracks.items;
-    var albumSong = document.getElementsById("albumInfo");
-    albumSong.innerHTML = `<img src="${immagine}" alt="copertina album" width=200> <h3>${titolo}</h3>`
+    var albumSong = document.getElementById("albumInfo");
+    albumSong.innerHTML = `<img src="${immagine}" alt="copertina album" width=200> <h3>Nome dell'album: ${titolo}</h3>`
     for (let i = 0; i < songs.length; i++){
-        tbody += `<tr><td><button class='btn btn-dark' onclick="playSong('${songs[i].id}', '${songs[i].name.replace(/'/g, "%27")}',1)>Play</td></tr>"
-                <td>${songs[i].name}</td>
-                <td>${msToTime(songs[i].duration_ms)}</td></tr>`;
+        tbody += `<tr><td><button class='btn btn-dark' onclick="playSong('${songs[i].id}', '${songs[i].name.replace(/'/g, "%27")}',1)>Play</td>
+                  <td>${songs[i].name}</td>
+                  <td>${msToTime(songs[i].duration_ms)}</td></tr>`;
     }
     let tbody2 = document.getElementById("tbody2")
     tbody2.innerHTML += tbody;
