@@ -16,7 +16,7 @@
                     <th>ID Prodotto</th>
                     <th>ID Produttore</th>
                     <th>Nome</th>
-                    <th>Immagine</th>
+                    <th>Immagine per dettagli</th>
             </thead>
                 <tbody id="tbody"></tbody>
         </table>
@@ -30,6 +30,7 @@
         <br>
         <table class="table table-bordered">
             <thead id="thead" class="table-light">
+                    <th>Produttore</th>  
                     <th>Nome</th>  
                     <th>Descrizione</th>
                     <th>Immagine</th>
@@ -71,7 +72,7 @@ async function renderTable() {
         const idProduttore = jsonListaProdotti["products"][prodotti]["manufacturer_id"];
         const nome = jsonListaProdotti["products"][prodotti]["name"];
         const immagine = prefisso+jsonListaProdotti["products"][prodotti]["photo"];
-        riga += `<tr><td>${idProdotto}</td><td>${idProduttore}</td><td>${nome}</td><td><img onclick='dettaglioProdotto(${idProdotto})' style="width:300px; height: auto" class="img-fluid" src="${immagine}"></td></tr>`;
+        riga += `<tr><td>${idProdotto}</td><td>${idProduttore}</td><td>${nome}</td><td><img onclick='dettaglioProdotto(${idProdotto})' style="width:200px; height: auto" class="img-fluid" src="${immagine}"></td></tr>`;
     }
     document.getElementById("tbody").innerHTML=riga;
   } catch (error) {
@@ -96,7 +97,6 @@ function indietro() {
 
 async function fetchDettagliProdotto(idProdotto){
     try {
-
         const response = await fetch(`https://lukagualtieri.eu.pythonanywhere.com/products/products/${idProdotto}`);
 
         if(!response.ok){
@@ -118,15 +118,17 @@ async function renderTable2(idProdotto) {
     let tbody = "";
     let prefisso = "https://eu.pythonanywhere.com/user/lukagualtieri/files/home/lukagualtieri/primo_progetto/uploads/";
     console.log(jsonDettagli);
-    for (let prodotti = 0; prodotti < jsonDettagli["products"][prodotti].length; prodotti++) {
-        const nome = jsonListaProdotti[prodotti]["name"];
-        const descrizione = jsonListaProdotti[prodotti]["description"];
-        const immagine = prefisso+jsonListaProdotti[prodotti]["photo"];
-        const prezzo = jsonListaProdotti[prodotti]["price"];
-        const prezzoSpedizione = jsonListaProdotti[prodotti]["shipping_cost"];
-        const quantita = jsonListaProdotti[prodotti]["quantity"];                                                               
-     tbody += `<tr><td>${nome}</td><td>${descrizione}</td><td><img style="width:600px; height: auto" class="img-fluid" src="${immagine}"></td><td>${prezzo}</td><td>${prezzoSpedizione}</td><td>${quantita}</td></tr>`;
-    }
+    const product = jsonDettagli.product; 
+    const nome = product.name;
+    const produttore = product.manufacturer;
+    const descrizione = product.description;
+    const immagine = prefisso + product.photo.replace("/media/", "");
+    const prezzo = product.price;
+    const prezzoSpedizione = product.shipping_cost;
+    const quantita = product.quantity;
+    console.log(immagine)
+    
+    tbody += `<tr><td>${produttore}</td><td>${nome}</td><td>${descrizione}</td><td><img style="width:800px; height: auto" class="img-fluid" src="${immagine}"></td><td>${prezzo}</td><td>${prezzoSpedizione}</td><td>${quantita}</td></tr>`;
     document.getElementById("tbody2").innerHTML = tbody;
   } catch (error) {
     console.log("Errore durante il rendering della tabella: ", error)
